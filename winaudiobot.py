@@ -9,9 +9,9 @@ def listen_comand():
  r=sr.Recognizer()
  with sr.Microphone() as source:
   print("Cкажите вашу команду:")
-  audio=r.listen(source , lang="ru")
+  audio=r.listen(source)
   try:
-    spich=r.recognize_google(audio)
+    spich=r.recognize_google(audio,languge="ru_RU")
     print("вы сказали"+spich)
     return spich
   except sr.UnknownValueError:
