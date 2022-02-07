@@ -1,5 +1,5 @@
 from email import message
-import pyaudio
+
 def listen_comand():
     
     
