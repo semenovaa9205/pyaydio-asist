@@ -4,7 +4,7 @@ from gtts import gTTS
 import time
 import random
 import speech_recognition as sr 
-from pyaudio import *
+
 def listen_comand():
  r=sr.Recognizer()
  with sr.Microphone() as source:
