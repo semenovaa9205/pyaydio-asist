@@ -49,7 +49,7 @@ def do_this_comand(message):
      for intent in db["intents"].keys():
       for example in db["intents"][intent]["examples"]:
                       if message==example:
-                        return print(intent)
+                    return  say_message(random.choice(db["intents"][intent]["responses"]))
                       else:
                        return say_message('команнда не распознана!!')    
                            
