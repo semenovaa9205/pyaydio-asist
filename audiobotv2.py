@@ -1,8 +1,12 @@
-from ast import If
+
+  
+from nltk import edit_distance
+from distutils.command.clean import clean
 from email import message
 import os
 import json
-from gtts import gTTS
+from audiobotv2 import do_this_comand
+from gTTS import gTTS
 import time
 import random
 import speech_recognition as sr 
@@ -23,11 +27,11 @@ def listen_comand():
 
     
     
-    #return input("Cкажите вашу команду:")
-def do_this_comand(message):
-     message=message.lower()
+    #return input("Cкажите вашу команду:")  
+      def do_this_comand(message):
+        message=message.lower()
     
-     db={
+      db={
      "intents":{
           'hello':{
            "examples":["привет","хай"],
@@ -46,36 +50,47 @@ def do_this_comand(message):
           }
              } 
              }
-     for intent in db["intents"].keys():
-      for example in db["intents"][intent]["examples"]:
+      for intent in db["intents"].keys():
+       for example in db["intents"][intent]["examples"]:
                       if message==example:
-                    return  say_message(random.choice(db["intents"][intent]["responses"]))
+                         text1=clean_message(message.lower())
+                         text2=clean_message(message.lower())
+                         return  say_message(clean_message( random.choice(db["intents"][intent]["responses"])))
                       else:
-                       return say_message('команнда не распознана!!')    
+                       return say_message('команнда не распознана!!')  
+                       
+def clean_message(message):
+      outtext=""
+      for char in message:
+            if char in "абвгдеёжзийклмнопрстуфхцчшщъыьэюя":
+                  outtext=outtext+char
+                  return outtext
+
+      
+
                            
                            
    
       
-                        
-      
-            
-def   say_message(message):
-  voice=gTTS(message, lang="ru")
-  file_voice_name="D:\pytich\saundasist\_iisoundvoice_"+str(time.time())+"_"+str(random.randint(0,10000))+".mp3" 
-  voice.save(file_voice_name)
-  os.startfile(file_voice_name)
-  print("Голосовой ассистент"+message)
-if __name__=='__main__':
-     while True:
-      comand=listen_comand()
-      do_this_comand(comand)
-      
-
-
-
-
-
-    
-        
+               
+              
      
- 
+                     
+def   say_message(message):
+             voice=gTTS(message, lang="ru")
+             file_voice_name="D:\pytich\saundasist\_iisoundvoice_"+str(time.time())+"_"+str(random.randint(0,10000))+".mp3" 
+             voice.save(file_voice_name)
+             os.startfile(file_voice_name)
+             print("Голосовой ассистент"+message)
+             
+             if __name__=='__main__':
+              while True:
+               comand=listen_comand()
+               do_this_comand(comand)
+      
+
+
+
+
+
+  
